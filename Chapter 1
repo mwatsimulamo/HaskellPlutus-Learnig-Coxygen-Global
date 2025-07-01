@@ -1,0 +1,28 @@
+-- Fonction qui compare trois choses et les affiche joliment
+compareAndShow :: (Eq a, Show a) => a -> a -> a -> String
+compareAndShow x y z =
+  if x == y && y == z
+    then "C'est égal à " ++ show z
+    else "Ces chiffres diffèrent : " ++ show x ++ ", " ++ show y ++ " et " ++ show z
+
+-- Fonction principale
+main :: IO ()
+main = do
+  putStrLn "SEANCE EN LIGNE HASKELL PLUTUS: le 22 Avril 2025"
+  print $ 5 == 5
+  print $ 5 == 6
+  print $ "chat" == "chat"
+  print $ True /= False
+  print $ 10 <= 9
+  print $ "romme" < "nèbre"
+  print $ False < True
+  print $ 3 + 6
+  print $ 10 * 5
+  print $ 8 - 2
+  print $ div 10 7
+  print $ mod 10 7
+  print $ 10.0 / 3.0
+  let age = 18
+  print $ show age
+  putStrLn $ compareAndShow 5 5 5
+  putStrLn $ compareAndShow 10 50 20
