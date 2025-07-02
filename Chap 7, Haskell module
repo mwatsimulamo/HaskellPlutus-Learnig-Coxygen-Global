@@ -1,0 +1,30 @@
+-- Fonction qui compare deux choses et les affiche joliment
+compareAndShow :: (Eq a, Show a) => a -> a -> String
+compareAndShow x y =
+  if x == y
+     then "C'est égal à " ++ show x
+     else "Différent : " ++ show x ++ " et " ++ show y
+
+-- Fonction principale
+main :: IO ()
+main = do
+  putStrLn "CHAPTER 7, HASKELL COURS PART"
+  putStrLn "MWATSIMULAMO BANYNENE OLIVIER"
+  putStrLn "I AM A STUDENT OF ISDR-GL/ DR CONGO"
+  putStrLn "This are codes for The excellence of type classes"
+  print $ 5 == 5
+  print $ "chat" == "ol"
+  print $ True /= False
+  print $ 10 > 7
+  print $ "pomme" < "zèbre"
+  print $ False < True
+  print $ 3 + 4
+  print $ 10 * 5
+  print $ 8 - 2
+  print $ div 10 3
+  print $ mod 10 3
+  print $ 7.0 / 2.0
+  let age = 18
+  print $ show age
+  putStrLn $ compareAndShow 5 5
+  putStrLn $ compareAndShow "chat" "chien"
