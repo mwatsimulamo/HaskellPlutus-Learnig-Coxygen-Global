@@ -1,0 +1,40 @@
+-- I am Olivier MWATSIMULAMO FROM GOMA/DRC.                                                                     grade :: Int -> String
+grade x
+    | x >= 90 = "90 et Plus"
+    | x >= 80 && x < 90 = "80 à 89"
+    | x >= 70 && x < 80 = "70 à 79"
+    | otherwise = "Moins de 70"
+
+rgbToHex :: (Int, Int, Int) -> String
+rgbToHex (r, g, b) =
+    let hexR = toHex r
+        hexG = toHex g
+        hexB = toHex b
+    in hexR ++ hexG ++ hexB
+  where
+    toHex :: Int -> String
+    toHex x =
+        let hex = "0123456789ABCDEF"
+            h1 = hex !! (x div 16)
+            h2 = hex !! (x mod 16)
+        in [h1, h2]
+
+isLeapYear :: Int -> Bool
+isLeapYear year =
+    if year mod 400 == 0
+        then True
+        else if year mod 100 == 0
+            then False
+            else if year mod 4 == 0
+                then True
+                else False
+main :: IO ()
+main = do
+    print (grade 30) 
+    print (grade 95)
+    print (grade 85)
+    print (rgbToHex (255, 0, 127))
+    print (rgbToHex (0, 255, 64))
+    print (isLeapYear 2100)
+    print (isLeapYear 1900)
+    print (isLeapYear 2024)
