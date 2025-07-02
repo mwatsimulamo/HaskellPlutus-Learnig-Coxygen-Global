@@ -1,40 +1,75 @@
--- I am Olivier MWATSIMULAMO FROM GOMA/DRC.                                                                     grade :: Int -> String
-grade x
-    | x >= 90 = "90 et Plus"
-    | x >= 80 && x < 90 = "80 à 89"
-    | x >= 70 && x < 80 = "70 à 79"
-    | otherwise = "Moins de 70"
+module Main where
+-- MazeGame.hs
 
-rgbToHex :: (Int, Int, Int) -> String
-rgbToHex (r, g, b) =
-    let hexR = toHex r
-        hexG = toHex g
-        hexB = toHex b
-    in hexR ++ hexG ++ hexB
-  where
-    toHex :: Int -> String
-    toHex x =
-        let hex = "0123456789ABCDEF"
-            h1 = hex !! (x div 16)
-            h2 = hex !! (x mod 16)
-        in [h1, h2]
+import System.IO
+import Data.Char (toLower)
 
-isLeapYear :: Int -> Bool
-isLeapYear year =
-    if year mod 400 == 0
-        then True
-        else if year mod 100 == 0
-            then False
-            else if year mod 4 == 0
-                then True
-                else False
+-- Types de mouvements possibles
+data Move = GoLeft | GoRight | GoForward deriving (Show, Eq)
+
+-- Structure du labyrinthe
+data Maze = Choice Maze Maze Maze | Wall | Exit deriving (Show, Eq)
+
+-- Appliquer un mouvement
+move :: Maze -> Move -> Maze
+move (Choice left forward right) direction =
+  case direction of
+    GoLeft    -> left
+    GoForward -> forward
+    GoRight   -> right
+move _ _ = Wall
+
+-- Exemple de labyrinthe
+testMaze :: Maze
+testMaze =
+  Choice
+    Wall
+    (Choice
+      (Choice Exit Wall Wall)
+      Wall
+      Wall)
+    Wall
+
+-- Appliquer tous les mouvements
+applyMoves :: Maze -> [Move] -> Maze
+applyMoves maze [] = maze
+applyMoves maze (m:ms) = applyMoves (move maze m) ms
+
+-- Traduire l'état final en message
+showCurrentChoice :: Maze -> String
+showCurrentChoice Wall = "You've hit a wall!"
+showCurrentChoice Exit = "YOU'VE FOUND THE EXIT!!"
+showCurrentChoice (Choice _ _ _) =
+  "You're still inside the maze. Choose a path, brave adventurer: GoLeft, GoRight, or GoForward."
+
+-- Fonction principale de résolution
+solveMaze :: Maze -> [Move] -> String
+solveMaze maze moves = showCurrentChoice (applyMoves maze moves)
+
+-- Fonction utilitaire pour parser les entrées
+parseMove :: String -> Maybe Move
+parseMove s =
+  case map toLower s of
+    "left"    -> Just GoLeft
+    "right"   -> Just GoRight
+    "forward" -> Just GoForward
+    _         -> Nothing
+
+-- Action main
 main :: IO ()
 main = do
-    print (grade 30) 
-    print (grade 95)
-    print (grade 85)
-    print (rgbToHex (255, 0, 127))
-    print (rgbToHex (0, 255, 64))
-    print (isLeapYear 2100)
-    print (isLeapYear 1900)
-    print (isLeapYear 2024)
+  putStrLn "Welcome to the Maze Game!"
+  putStrLn "Enter your moves as a space-separated list (left, right, forward):"
+  putStr "> "
+  hFlush stdout
+  input <- getLine
+  let moveStrings = words input
+  let maybeMoves = map parseMove moveStrings
+  if all (/= Nothing) maybeMoves
+    then do
+      let moves = map (\(Just m) -> m) maybeMoves
+      let result = solveMaze testMaze moves
+      putStrLn $ "\nResult: " ++ result
+    else do
+      putStrLn "Invalid input detected. Please use only: left, right, forward."
+
