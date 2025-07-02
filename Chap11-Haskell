@@ -1,0 +1,11 @@
+chatBot :: IO () -- Type de la fonction chatBot
+chatBot = do
+  putStrLn "Bonjour ! Je suis un chatbot pour vous permettre de faire quelques interactions."
+  putStrLn "Comment pouvons-nous vous appeler ?"
+  nom <- getLine -- L'utilisateur entre son nom
+  putStrLn ("Alors " ++ nom ++ ", comment pouvons-nous vous aider ?")
+  help <- getLine -- L'utilisateur décrit son besoin (non utilisé ici, mais capturé)
+  putStrLn ("Merci " ++ help ++ " de nous avoir contacté.")
+
+main :: IO () -- Point d'entrée du programme
+main = chatBot
