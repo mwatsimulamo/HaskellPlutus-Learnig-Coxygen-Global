@@ -1,0 +1,16 @@
+-- Je suis Olivier MWATSIMULAMO depuis l'ISDR-GL Goma. 
+--Je constinue à m'exercer en Haskell
+-- Le chapitre 5 bien que complexe, il est petit à petit comprehensible
+createEmail :: String -> String -> String -> String
+createEmail domain name lastName = name ++ "." ++ lastName ++ "@" ++ domain
+main :: IO ()
+main = do
+  putStrLn "OLIVIER MWATSIMULAMO PRACTICES RESULTS FOR 5th CHAPTER"
+  putStrLn "Fonction(Filter): "
+  print $ filter even [1..20]
+  putStrLn "Fonction(any) pour voir si dans la liste il y a un nombre superieur à 20: "
+  print (any (\x -> x > 20) [1,2,3,4])
+  putStrLn "Fonction(any) pour verifier s'il y a un vehicule disponible"
+  print $ any ((_, x) -> x > 0) [("Toyota",0), ("Nissan",0), ("Ford",0)]
+  print $ filter (\x -> 'B' elem x) ["Apple", "Banana", "Pear", "Grape", "Wood"]
+  print $ createEmail "Olivier" "banyene" "environnement"
