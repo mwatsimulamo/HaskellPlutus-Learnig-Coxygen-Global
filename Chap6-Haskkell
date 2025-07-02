@@ -1,0 +1,54 @@
+-- Salut Je suis OLIVIER MWATSIMULAMO
+-- ISDR-GL, Ville de Goma RDC
+-- Je suis entrain de faire des pratiques pour le chapitre 6
+--Partie HASKELL 
+
+mySum :: [Int] -> Int
+mySum [] = 0
+mySum (x:xs) = x + mySum xs
+
+myProduct :: [Int] -> Int
+myProduct [] = 1
+myProduct (x:xs) = x * myProduct xs
+
+myAnd :: [Bool] -> Bool
+myAnd [] = True
+myAnd (x:xs) = x && myAnd xs
+
+myLength :: [a] -> Int
+myLength [] = 0
+myLength (:xs) = 1 + myLength xs
+
+myReverse :: [a] -> [a]
+myReverse [] = []
+myReverse (x:xs) = myReverse xs ++ [x]
+
+myDrop :: Int -> [a] -> [a]
+myDrop 0 xs = xs
+myDrop  [] = []
+myDrop n (:xs) = myDrop (n-1) xs
+myTake :: Int -> [a] -> [a]
+myTake 0  = []
+myTake  [] = []
+myTake n (x:xs) = x : myTake (n-1) xs
+myMap :: (a -> b) -> [a] -> [b]
+myMap  [] = []
+myMap f (x:xs) = f x : myMap f xs
+myFilter :: (a -> Bool) -> [a] -> [a]
+myFilter _ [] = []
+myFilter p (x:xs)
+  | p x       = x : myFilter p xs
+  | otherwise = myFilter p xs
+-- Fonction principale avec des tests
+main :: IO ()
+main = do
+  putStrLn " Je suis Olivier MWATSIMULAMO, je fais une pratique du chapitre 6, HASKELL"
+  print $ mySum [1,2,3,4]          -- 10
+  print $ myProduct [2,3,4]        -- 24
+  print $ myAnd [True, True, False] -- False
+  print $ myLength [10, 20, 30]    -- 3
+  print $ myReverse [1,2,3]        -- [3,2,1]
+  print $ myDrop 2 [1,2,3,4,5]     -- [3,4,5]
+  print $ myTake 3 [1,2,3,4,5]     -- [1,2,3]
+  print $ myMap (+1) [1,2,3]       -- [2,3,4]
+  print $ myFilter even [1..10]    -- [2,4,6,8,10] 
