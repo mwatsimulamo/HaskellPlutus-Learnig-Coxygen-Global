@@ -1,0 +1,35 @@
+concStr :: String -> String -> String
+concStr s1 s2 = s1 ++ s2
+
+somme6 :: Int -> Int -> Int -> Int -> Int -> Int -> Int
+somme6 a b c d e f = a + b + c + d + e + f
+
+etISDR :: Int -> String
+etISDR x
+  | x == 1 = "Antoine"
+  | x == 2 = "Olivier"
+  | x == 3 = "KAOTA"
+  | otherwise = "Voila" 
+complexFunc1 :: Int -> Int
+complexFunc1 x = x + 1
+
+func1 :: Int -> Int
+func1 x = complexFunc1 (complexFunc1 x)
+
+complexFunc2 :: Int -> Int
+complexFunc2 x = x + 2
+
+func2 :: Int -> Int
+func2 x = (complexFunc2 (complexFunc2 x)) + (complexFunc2 (complexFunc2 x))
+
+main :: IO ()
+main = do
+  print $ concStr "Olivier" "Robert"
+  print $ somme6 4 10 30 50 40 60
+  print $ etISDR 1
+  print $ etISDR 2
+  print $ etISDR 3
+  print $ complexFunc1 5       -- Résultat de complexFunc1
+  print $ func1 3               -- Résultat de func1
+  print $ complexFunc2 3        -- Résultat de complexFunc2
+  print $ func2 3               -- Résultat de func2 
