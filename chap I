@@ -1,1 +1,17 @@
+--Un fonction qui prends un chiffre et le multiplie par 3
+--1. Définir le nom de la fonction : ecemple: pour notre fonction  nous l'appellons "triple"
+-- D"finir le type de la fonction que vous voulez écrire
+
+multiplierPar2 :: Int -> Int
+multiplierPar2 x = x * 2
+
+supA3 :: Int -> Bool
+supA3 x = x > 3
+
+main :: IO ()
+main = do
+  putStrLn "Ceci est mon code. Je OLIVIER MWATSIMUMAMO BANYENE, Etudiant à l'ISDR-GL"
+  print $ multiplierPar2 10
+  print $ supA3 4
+
 
